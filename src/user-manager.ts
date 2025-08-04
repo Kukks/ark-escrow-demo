@@ -26,8 +26,7 @@ export class UserManager {
         });
         
         // Load initial users
-        await this.loadUsers();
-        this.buildUsedNamesSet();
+        await this.loadUsers();;
     }
 
     /**
@@ -107,7 +106,10 @@ export class UserManager {
             this.users.clear();
             users.forEach(user => {
                 this.users.set(user.pubkey, user);
+
             });
+            
+        this.buildUsedNamesSet()
         } catch (error) {
             console.error('Failed to load users from communication provider:', error);
         }
