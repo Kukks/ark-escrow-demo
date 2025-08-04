@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ark Escrow Demo</title>
+    
+  <script type="module" crossorigin src="/ark-escrow-demo/assets/main-59028667.js"></script>
+  <link rel="stylesheet" href="/ark-escrow-demo/assets/index-876d455b.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🔒 Ark Escrow Demo</h1>
+            <p>Multi-party escrow contracts on Bitcoin</p>
+        </header>
+
+        <!-- Server Configuration -->
+        <section class="card server-config">
+            <h2>⚙️ Server Configuration</h2>
+            <div class="form-group">
+                <label for="arkServerUrl">Ark Server URL:</label>
+                <input type="url" id="arkServerUrl" value="" placeholder="Enter Ark server URL (e.g., http://localhost:7070)">
+                <button id="connectServer" class="btn btn-primary">Connect</button>
+            </div>
+            <div id="serverStatus" class="status"></div>
+        </section>
+
+        <!-- Wallet Management -->
+        <section class="card">
+            <h2>💳 Wallet Management</h2>
+            <div class="wallet-actions">
+                <button id="createWallet" class="btn btn-primary">Create New Wallet</button>
+                <button id="importWallet" class="btn btn-secondary">Import Wallet</button>
+            </div>
+            
+            <div id="importForm" class="form-group hidden">
+                <label for="privateKey">Private Key (hex):</label>
+                <input type="text" id="privateKey" placeholder="Enter private key...">
+                <button id="confirmImport" class="btn btn-primary">Import</button>
+                <button id="cancelImport" class="btn btn-secondary">Cancel</button>
+            </div>
+
+            <div id="walletInfo" class="wallet-info hidden">
+                <h3>Wallet Details</h3>
+                <div class="info-row">
+                    <span class="label">Address:</span>
+                    <span id="walletAddress" class="value"></span>
+                    <button id="copyAddress" class="btn btn-small">Copy</button>
+                </div>
+                <div class="info-row">
+                    <span class="label">Public Key:</span>
+                    <span id="walletPubkey" class="value"></span>
+                </div>
+                <div class="info-row">
+                    <span class="label">Private Key:</span>
+                    <span id="walletPrivkey" class="value"></span>
+                    <button id="copyPrivkey" class="btn btn-small">Copy</button>
+                    <button id="hidePrivkey" class="btn btn-small">Hide</button>
+                </div>
+                <div class="info-row">
+                    <span class="label">Balance:</span>
+                    <span id="walletBalance" class="value">Loading...</span>
+                    <button id="refreshBalance" class="btn btn-small">Refresh</button>
+                </div>
+                
+                <!-- Transactions Section -->
+                <div class="transactions-section">
+                    <h3>💰 Transactions</h3>
+                    <div class="transaction-actions">
+                        <button id="settleBtn" class="btn btn-primary">Settle</button>
+                        <button id="sendBtn" class="btn btn-secondary">Send</button>
+                    </div>
+
+                    <div id="sendForm" class="form-group hidden">
+                        <h4>Send Transaction</h4>
+                        <div class="form-row">
+                            <label for="sendAddress">To Address:</label>
+                            <input type="text" id="sendAddress" placeholder="Recipient address...">
+                        </div>
+                        <div class="form-row">
+                            <label for="sendAmount">Amount (sats):</label>
+                            <input type="number" id="sendAmount" placeholder="1000" min="1">
+                        </div>
+                        <div class="form-actions">
+                            <button id="confirmSend" class="btn btn-primary">Send</button>
+                            <button id="cancelSend" class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- User Discovery -->
+        <section class="card">
+            <h2>👥 Connected Users</h2>
+            <div class="user-controls">
+                <button id="refreshUsers" class="btn btn-primary">Refresh Users</button>
+                <p class="auto-register-info">Users are automatically registered when a wallet is loaded.</p>
+            </div>
+            <div id="usersList" class="users-list">
+                <p class="empty-state">No users connected. Register to see other users.</p>
+            </div>
+        </section>
+
+        <!-- Escrow Contracts -->
+        <section class="card">
+            <h2>🤝 Escrow Contracts</h2>
+            
+            <!-- Create Contract Form -->
+            <div class="contract-form">
+                <h3>Create New Contract</h3>
+                <div class="form-row">
+                    <label for="buyerSelect">Buyer:</label>
+                    <select id="buyerSelect">
+                        <option value="">Select buyer...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="sellerSelect">Seller:</label>
+                    <select id="sellerSelect">
+                        <option value="">Select seller...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="arbitratorSelect">Arbitrator:</label>
+                    <select id="arbitratorSelect">
+                        <option value="">Select arbitrator...</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label for="contractDescription">Description:</label>
+                    <input type="text" id="contractDescription" placeholder="Contract description...">
+                </div>
+                <button id="createContract" class="btn btn-primary">Create Escrow Contract</button>
+            </div>
+
+            <!-- Active Contracts -->
+            <div class="contracts-section">
+                <div class="section-header">
+                    <h3>Active Contracts</h3>
+                    <button id="refreshContracts" class="btn btn-primary">Refresh Contracts</button>
+                </div>
+                <div id="contractsList" class="contracts-list">
+                    <p class="empty-state">No contracts created yet.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notifications -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+
+    
+</body>
+</html>
